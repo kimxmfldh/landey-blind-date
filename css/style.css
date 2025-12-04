@@ -905,10 +905,17 @@ html, body {
     justify-content: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     z-index: 9998;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
     animation: floatingBounce 3s ease-in-out infinite;
+}
+
+.floating-kakao-btn.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    pointer-events: none;
 }
 
 .floating-kakao-btn:hover {

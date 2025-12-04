@@ -54,6 +54,27 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Image failed to load:', this.src);
         });
     });
+
+    // 플로팅 카카오 버튼 스크롤 제어
+    const floatingKakaoBtn = document.querySelector('.floating-kakao-btn');
+    const ctaSection = document.querySelector('.cta-section');
+
+    if (floatingKakaoBtn && ctaSection) {
+        const handleScroll = () => {
+            const ctaRect = ctaSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // CTA 섹션이 화면에 보이기 시작하면 플로팅 버튼 숨기기
+            if (ctaRect.top < windowHeight && ctaRect.bottom > 0) {
+                floatingKakaoBtn.classList.add('hidden');
+            } else {
+                floatingKakaoBtn.classList.remove('hidden');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // 초기 상태 체크
+    }
 });
 
 // 유틸리티 함수들
