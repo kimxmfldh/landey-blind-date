@@ -57,15 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 플로팅 카카오 버튼 스크롤 제어
     const floatingKakaoBtn = document.querySelector('.floating-kakao-btn');
-    const ctaSection = document.querySelector('.cta-section');
+    const finalMessageSection = document.querySelector('.final-message-section');
 
-    if (floatingKakaoBtn && ctaSection) {
+    if (floatingKakaoBtn && finalMessageSection) {
         const handleScroll = () => {
-            const ctaRect = ctaSection.getBoundingClientRect();
+            const finalRect = finalMessageSection.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // CTA 섹션이 화면에 보이기 시작하면 플로팅 버튼 숨기기
-            if (ctaRect.top < windowHeight && ctaRect.bottom > 0) {
+            // Final message 섹션이 화면에 50% 이상 보이면 플로팅 버튼 숨기기
+            if (finalRect.top < windowHeight * 0.5) {
                 floatingKakaoBtn.classList.add('hidden');
             } else {
                 floatingKakaoBtn.classList.remove('hidden');
