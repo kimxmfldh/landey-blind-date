@@ -59,32 +59,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const floatingKakaoBtn = document.querySelector('.floating-kakao-btn');
     const finalMessageSection = document.querySelector('.final-message-section');
 
-    console.log('Floating button:', floatingKakaoBtn);
-    console.log('Final message section:', finalMessageSection);
-
     if (floatingKakaoBtn && finalMessageSection) {
+        let ticking = false;
+
         const handleScroll = () => {
-            const sectionRect = finalMessageSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const sectionRect = finalMessageSection.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
 
-            console.log('Section top:', sectionRect.top, 'Window height:', windowHeight);
+                    // final-message-section이 화면에 보이기 시작하면 플로팅 버튼 숨기기
+                    if (sectionRect.top <= windowHeight) {
+                        floatingKakaoBtn.classList.add('hidden');
+                    } else {
+                        floatingKakaoBtn.classList.remove('hidden');
+                    }
 
-            // final-message-section이 화면에 보이기 시작하면 플로팅 버튼 숨기기
-            if (sectionRect.top <= windowHeight) {
-                console.log('Adding hidden class');
-                floatingKakaoBtn.classList.add('hidden');
-            } else {
-                console.log('Removing hidden class');
-                floatingKakaoBtn.classList.remove('hidden');
+                    ticking = false;
+                });
+                ticking = true;
             }
         };
 
         // 스크롤과 리사이즈 모두 감지
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleScroll);
+        document.addEventListener('scroll', handleScroll);
         handleScroll(); // 초기 상태 체크
-    } else {
-        console.log('Elements not found!');
     }
 });
 
