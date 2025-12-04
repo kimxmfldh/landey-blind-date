@@ -55,37 +55,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 플로팅 카카오 버튼 스크롤 제어
+    // 플로팅 카카오 버튼 스크롤 제어 (IntersectionObserver 사용)
     const floatingKakaoBtn = document.querySelector('.floating-kakao-btn');
     const finalMessageSection = document.querySelector('.final-message-section');
 
     if (floatingKakaoBtn && finalMessageSection) {
-        let ticking = false;
+        const buttonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // final-message-section이 화면에 보이기 시작하면 플로팅 버튼 숨기기
+                if (entry.isIntersecting) {
+                    floatingKakaoBtn.classList.add('hidden');
+                } else {
+                    floatingKakaoBtn.classList.remove('hidden');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0,
+            rootMargin: '0px'
+        });
 
-        const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const sectionRect = finalMessageSection.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-
-                    // final-message-section이 화면에 보이기 시작하면 플로팅 버튼 숨기기
-                    if (sectionRect.top <= windowHeight) {
-                        floatingKakaoBtn.classList.add('hidden');
-                    } else {
-                        floatingKakaoBtn.classList.remove('hidden');
-                    }
-
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        // 스크롤과 리사이즈 모두 감지
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
-        document.addEventListener('scroll', handleScroll);
-        handleScroll(); // 초기 상태 체크
+        buttonObserver.observe(finalMessageSection);
     }
 });
 
