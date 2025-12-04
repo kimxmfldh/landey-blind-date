@@ -59,15 +59,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const floatingKakaoBtn = document.querySelector('.floating-kakao-btn');
     const finalMessageSection = document.querySelector('.final-message-section');
 
+    console.log('Floating button:', floatingKakaoBtn);
+    console.log('Final message section:', finalMessageSection);
+
     if (floatingKakaoBtn && finalMessageSection) {
         const handleScroll = () => {
             const sectionRect = finalMessageSection.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
+            console.log('Section top:', sectionRect.top, 'Window height:', windowHeight);
+
             // final-message-section이 화면에 보이기 시작하면 플로팅 버튼 숨기기
             if (sectionRect.top <= windowHeight) {
+                console.log('Adding hidden class');
                 floatingKakaoBtn.classList.add('hidden');
             } else {
+                console.log('Removing hidden class');
                 floatingKakaoBtn.classList.remove('hidden');
             }
         };
@@ -76,6 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleScroll);
         handleScroll(); // 초기 상태 체크
+    } else {
+        console.log('Elements not found!');
     }
 });
 
