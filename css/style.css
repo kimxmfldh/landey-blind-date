@@ -891,14 +891,14 @@ html, body {
     }
 }
 
-/* Floating Kakao Button */
+/* Floating Instagram Button */
 .floating-kakao-btn {
     position: fixed;
     bottom: 24px;
     right: 24px;
     width: 60px;
     height: 60px;
-    background: #FEE500;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -930,7 +930,7 @@ html, body {
 .kakao-icon {
     width: 32px;
     height: 32px;
-    color: #3C1E1E;
+    color: #FFFFFF;
 }
 
 @keyframes floatingBounce {
